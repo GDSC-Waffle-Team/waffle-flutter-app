@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waffle/screens/manage.dart';
 import 'package:waffle/styles/palette.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,6 +10,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isObscure = true;
+
+  TextEditingController _idController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.height;
@@ -21,15 +26,9 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 85.0),
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                        color: Palette.darkGrey,
-                        fontSize: 45,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
+                    padding: const EdgeInsets.only(top: 85.0),
+                    child: Icon(Icons.lock_outline_rounded,
+                        size: 85.0, color: Palette.darkGrey)),
                 const Divider(
                   color: Palette.tickGrey,
                   thickness: 2.0,
@@ -45,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Container(
                               height: _height * 0.07,
                               width: _width * 0.6,
@@ -53,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: BoxDecoration(
                                   color: Palette.lightGrey,
                                   border: Border.all(color: Palette.darkGrey),
-                                  borderRadius: BorderRadius.circular(15),
+                                  borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
                                         color:
@@ -63,41 +62,54 @@ class _LoginScreenState extends State<LoginScreen> {
                                         offset: Offset.zero)
                                   ]),
                               child: Center(
-                                child: TextField(
+                                child: TextFormField(
+                                  controller: _idController,
+                                  cursorColor: Palette.tickGrey,
+                                  maxLines: 1,
                                   decoration: InputDecoration(
-                                      focusColor: Palette.darkGrey,
-                                      border: InputBorder.none,
-                                      icon: Icon(
-                                        Icons.person,
-                                        color: Palette.tickGrey,
-                                      )),
+                                    hintText: "아이디",
+                                    focusColor: Palette.darkGrey,
+                                    border: InputBorder.none,
+                                  ),
                                 ),
                               )),
                         ),
                         Container(
-                            height: _height * 0.07,
-                            width: _width * 0.6,
-                            margin: const EdgeInsets.only(top: 15.0),
-                            decoration: BoxDecoration(
-                                color: Palette.lightGrey,
-                                border: Border.all(color: Palette.darkGrey),
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Palette.tickGrey.withOpacity(0.3),
-                                      spreadRadius: 3,
-                                      blurRadius: 15,
-                                      offset: Offset.zero)
-                                ]),
-                            child: Center(
-                              child: TextField(
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      icon: Icon(
-                                        Icons.lock_outlined,
-                                        color: Palette.tickGrey,
-                                      ))),
-                            )),
+                          height: _height * 0.07,
+                          width: _width * 0.6,
+                          margin: const EdgeInsets.only(top: 15.0),
+                          decoration: BoxDecoration(
+                              color: Palette.lightGrey,
+                              border: Border.all(color: Palette.darkGrey),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Palette.tickGrey.withOpacity(0.3),
+                                    spreadRadius: 3,
+                                    blurRadius: 15,
+                                    offset: Offset.zero)
+                              ]),
+                          child: Center(
+                              child: TextFormField(
+                            controller: _passwordController,
+                            cursorColor: Palette.tickGrey,
+                            obscureText: _isObscure,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "비밀번호",
+                                suffixIcon: IconButton(
+                                  color: Palette.tickGrey,
+                                  icon: Icon(_isObscure
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(() {
+                                      _isObscure = !_isObscure;
+                                    });
+                                  },
+                                )),
+                          )),
+                        )
                       ],
                     ),
                     Padding(
@@ -107,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: _width * 0.23,
                         decoration: BoxDecoration(
                             color: Palette.darkGrey,
-                            borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(
                                   color: Palette.tickGrey.withOpacity(0.3),
@@ -118,6 +130,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: IconButton(
                           onPressed: () {
                             // isResponse status == 200 ? Route Page : null
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ManageScreen()));
                           },
                           icon:
                               Icon(Icons.login_outlined, color: Palette.mimosa),

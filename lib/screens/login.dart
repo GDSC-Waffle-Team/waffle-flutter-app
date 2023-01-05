@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:waffle/screens/manage.dart';
 import 'package:waffle/styles/palette.dart';
+import 'package:waffle/widgets/waffle_bottom_navigator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,7 +11,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isObscure = true;
-
   TextEditingController _idController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   @override
@@ -31,12 +30,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         size: 85.0, color: Palette.darkGrey)),
                 const Divider(
                   color: Palette.tickGrey,
-                  thickness: 2.0,
+                  height: 15.0,
+                  thickness: 1.0,
                   indent: 25.0,
                   endIndent: 25.0,
                 ),
+                Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Text(
+                      "로그인",
+                      style: TextStyle(
+                          color: Palette.darkGrey,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w700),
+                    )),
                 SizedBox(
-                  height: _height * 0.1,
+                  height: _height * 0.08,
                 ),
                 Row(
                   children: [
@@ -61,7 +70,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         blurRadius: 15,
                                         offset: Offset.zero)
                                   ]),
-                              child: Center(
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(top: 3.0, left: 10.0),
                                 child: TextFormField(
                                   controller: _idController,
                                   cursorColor: Palette.tickGrey,
@@ -89,26 +100,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                     blurRadius: 15,
                                     offset: Offset.zero)
                               ]),
-                          child: Center(
+                          child: Container(
+                              margin:
+                                  const EdgeInsets.only(top: 3.0, left: 10.0),
                               child: TextFormField(
-                            controller: _passwordController,
-                            cursorColor: Palette.tickGrey,
-                            obscureText: _isObscure,
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "비밀번호",
-                                suffixIcon: IconButton(
-                                  color: Palette.tickGrey,
-                                  icon: Icon(_isObscure
-                                      ? Icons.visibility
-                                      : Icons.visibility_off),
-                                  onPressed: () {
-                                    setState(() {
-                                      _isObscure = !_isObscure;
-                                    });
-                                  },
-                                )),
-                          )),
+                                controller: _passwordController,
+                                cursorColor: Palette.tickGrey,
+                                obscureText: _isObscure,
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "비밀번호",
+                                    suffixIcon: IconButton(
+                                      color: Palette.tickGrey,
+                                      icon: Icon(_isObscure
+                                          ? Icons.visibility
+                                          : Icons.visibility_off),
+                                      onPressed: () {
+                                        setState(() {
+                                          _isObscure = !_isObscure;
+                                        });
+                                      },
+                                    )),
+                              )),
                         )
                       ],
                     ),
@@ -133,7 +146,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ManageScreen()));
+                                    builder: (context) =>
+                                        BottomNavigationScreen()));
                           },
                           icon:
                               Icon(Icons.login_outlined, color: Palette.mimosa),
@@ -144,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: _height * 0.2,
+                  height: _height * 0.15,
                 ),
                 Container(
                   child: Column(
@@ -154,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           "Powered by",
                           style: TextStyle(
-                              color: Palette.darkGrey,
+                              color: Palette.tickGrey,
                               fontSize: 15,
                               fontWeight: FontWeight.w100),
                         ),

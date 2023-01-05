@@ -32,7 +32,20 @@ class _BottomNavigationScreen extends State<BottomNavigationScreen> {
         splashColor: Palette.mimosa,
         backgroundColor: Palette.darkGrey,
         elevation: 2.0,
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: ((context) {
+                return AlertDialog(
+                    backgroundColor: Palette.lightGrey,
+                    content: Container(
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      child: Column(children: [
+                        //MARK: MEMBER LIST SELECTOR, PUSH TO DATA BUTTON, CANCEL BUTTON
+                      ]),
+                    ));
+              }));
+        },
         child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(

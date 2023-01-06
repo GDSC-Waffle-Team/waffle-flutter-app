@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:waffle/screens/status.dart';
 import 'package:waffle/widgets/waffle_appbar.dart';
 import 'package:waffle/styles/palette.dart';
 
@@ -100,27 +99,6 @@ class _ManageScreenState extends State<ManageScreen> {
           ],
         ),
       ),
-      /*
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        splashColor: Palette.mimosa,
-        backgroundColor: Palette.darkGrey,
-        elevation: 2.0,
-        onPressed: () {},
-        child: Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Palette.darkGrey,
-        selectedItemColor: Palette.mimosa,
-        unselectedItemColor: Palette.tickGrey,
-        onTap: _onTapped,
-        currentIndex: _selectedIndex,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: '관리'),
-        ],
-      ),
-      */
     );
   }
 }

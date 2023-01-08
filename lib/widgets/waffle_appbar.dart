@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:waffle/styles/palette.dart';
 
 class WaffleAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const WaffleAppBar({Key? key, this.color = Palette.lightGrey})
-      : super(key: key);
-  final Color color;
+  const WaffleAppBar({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(backgroundColor: color, elevation: 0);
+    return AppBar(backgroundColor: Palette.lightGrey, elevation: 0);
   }
 
   @override

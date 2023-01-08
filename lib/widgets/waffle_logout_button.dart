@@ -11,12 +11,14 @@ class WaffleLogoutButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 20.0),
       child: TextButton(
-          onPressed: onPressed,
-          child: Text("로그아웃",
-              style: TextStyle(
-                  color: Palette.tickGrey,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w100))),
+        onPressed: onPressed,
+        style: TextButton.styleFrom(foregroundColor: Palette.tickGrey),
+        child: Text("로그아웃",
+            style: TextStyle(
+                color: Palette.tickGrey,
+                fontSize: 15,
+                fontWeight: FontWeight.w100)),
+      ),
     );
   }
 }

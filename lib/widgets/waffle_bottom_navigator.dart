@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:waffle/screens/manage.dart';
-import 'package:waffle/screens/status.dart';
+import 'package:waffle/screens/manager.dart';
+import 'package:waffle/screens/manage_member.dart';
 import 'package:waffle/widgets/waffle_appbar.dart';
 import 'package:waffle/styles/palette.dart';
 
@@ -12,7 +12,7 @@ class BottomNavigationScreen extends StatefulWidget {
 }
 
 class _BottomNavigationScreen extends State<BottomNavigationScreen> {
-  static List<Widget> _widgetOptions = [ManageScreen(), StatusScreen()];
+  static List<Widget> _widgetOptions = [ManageScreen(), ManageMemberScreen()];
 
   int _selectedIndex = 0;
   void _onTapped(int index) {

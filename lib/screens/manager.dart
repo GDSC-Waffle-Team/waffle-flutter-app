@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:waffle/providers/member_data.dart';
+import 'package:waffle/screens/login.dart';
+import 'package:waffle/utilities/services.dart';
 import 'package:waffle/widgets/waffle_appbar.dart';
 import 'package:waffle/styles/palette.dart';
 
@@ -11,14 +15,26 @@ class ManageScreen extends StatefulWidget {
 
 class _ManageScreenState extends State<ManageScreen> {
   //MARK: TO BE CHANGED
+  final secureStorage = FlutterSecureStorage();
+  //Future<MemberData>? memberData;
+  //memberData = snapshot.data;
   var amount = 0;
   var roles = "관리자";
   var username = "김하은";
 
   @override
+  void initState() {
+    super.initState();
+    //memberData;
+    HttpServices httpServices = HttpServices();
+    httpServices.getService;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
+    final secureStorage = FlutterSecureStorage();
     return Scaffold(
       backgroundColor: Palette.lightGrey,
       appBar: WaffleAppBar(),
@@ -59,11 +75,20 @@ class _ManageScreenState extends State<ManageScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(
                                     right: 25.0, top: 25.0),
-                                child: Text("로그아웃",
-                                    style: TextStyle(
-                                        color: Palette.tickGrey,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w100)),
+                                child: TextButton(
+                                    onPressed: () async {
+                                      secureStorage.delete(key: "loginKey");
+                                      Navigator.pop(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: ((context) =>
+                                                  LoginScreen())));
+                                    },
+                                    child: Text("로그아웃",
+                                        style: TextStyle(
+                                            color: Palette.tickGrey,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w100))),
                               ),
                             ],
                           )
@@ -85,7 +110,7 @@ class _ManageScreenState extends State<ManageScreen> {
                                       offset: Offset.zero)
                                 ]))),
                     SizedBox(height: 35.0),
-                    Positioned(
+                    Center(
                         child: Text("최근 기록",
                             style: TextStyle(
                                 color: Palette.tickGrey, fontSize: 25))),

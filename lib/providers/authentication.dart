@@ -11,8 +11,8 @@ class Authentication {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['memberId'] = memberId;
-    data['password'] = password;
+    data["memberId"] = memberId;
+    data["password"] = password;
     return data;
   }
 }

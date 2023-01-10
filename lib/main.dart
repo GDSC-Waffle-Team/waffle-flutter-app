@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waffle/screens/login.dart';
+import 'package:waffle/screens/member.dart';
+import 'package:waffle/widgets/waffle_bottom_navigator.dart';
 
 //MARK: ROOT WIDGET
 void main() {
@@ -16,9 +18,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           brightness: Brightness.light,
           useMaterial3: true,
-          fontFamily: "NotoSansKR"),
-      home: LoginScreen(),
+          fontFamily: "NotoSans"),
       debugShowCheckedModeBanner: false,
+      initialRoute: "/login",
+      routes: {
+        "/login": (context) => LoginScreen(),
+        "/navigator": (context) => BottomNavigationScreen(),
+        "/member": (context) => MemberScreen(),
+      },
     );
   }
 }

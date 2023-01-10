@@ -1,4 +1,3 @@
-//MARK: LOGIN DATA MODEL
 class Authentication {
   String? memberId;
   String? password;

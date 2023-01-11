@@ -1,29 +1,24 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:waffle/screens/member.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:waffle/styles/palette.dart';
 import 'package:waffle/utilities/authentication.dart';
-import 'package:waffle/widgets/waffle_bottom_navigator.dart';
 import 'package:waffle/widgets/waffle_character.dart';
 import 'package:waffle/widgets/waffle_login_button.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var memberIdController = TextEditingController();
-  var passwordController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  //MARK: ANDROID = KEYSTORE, iOS = KEYCHAIN
-  static final secureStorage = FlutterSecureStorage();
-  //MARK: SAVE INTO FLUTTER SECURE STORAGE
   dynamic userInfo = "";
   bool _isObscure = true;
   Authenticator authenticator = Authenticator();
+  var memberIdController = TextEditingController();
+  var passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final secureStorage = FlutterSecureStorage();
 
   @override
   void initState() {
@@ -31,19 +26,25 @@ class _LoginScreenState extends State<LoginScreen> {
 
     //MARK: LOAD TO FLUTTER SECURE STORAGE INFORMATION
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _asyncMethod();
+      _autoLogin();
     });
     authenticator;
   }
 
-  _asyncMethod() async {
+  //**MARK: AUTO LOGIN (VERY IMFORTANT)*/
+  _autoLogin() async {
     userInfo = await secureStorage.read(key: "loginKey");
-    print("userInfo: $userInfo");
-    if (userInfo != null) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => BottomNavigationScreen()));
+    if (userInfo != null &&
+        (await authenticator.classifier(userInfo) == true)) {
+      print("$userInfo");
+      print("autoLogin: 관리자 스크린으로 이동했어요.");
+      Navigator.pushNamed(context, "/navigator");
+    } else if (userInfo != null &&
+        (await authenticator.classifier(userInfo) == false)) {
+      print("autoLogin: 멤버 스크린으로 이동했어요.");
+      Navigator.pushNamed(context, "/member");
     } else {
-      print("로그인이 필요해요.");
+      print("autoLogin Error: userInfo가 존재하지 않아요. 로그인이 필요해요.");
     }
   }
 
@@ -66,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 Padding(
-                    padding: const EdgeInsets.only(top: 85.0),
+                    padding: const EdgeInsets.only(top: 75.0),
                     child: Icon(Icons.lock_outline_rounded,
                         size: 85.0, color: Palette.darkGrey)),
                 const Divider(
@@ -78,11 +79,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Padding(
                     padding: const EdgeInsets.only(top: 5.0),
-                    child: Text(
+                    child: const Text(
                       "로그인",
                       style: TextStyle(
                           color: Palette.darkGrey,
-                          fontSize: 25,
+                          fontSize: 30,
                           fontWeight: FontWeight.w700),
                     )),
                 SizedBox(
@@ -199,22 +200,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                   memberIdController.text,
                                   passwordController.text) ==
                               true) {
-                            /*
-                              await secureStorage.write(
-                                  key: "loginKey",
-                                  value: "memberid" +
-                                      _memberIdController.text +
-                                      " " +
-                                      "password" +
-                                      _passwordController.text + );*/
-                            print("로그인 성공");
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(successMessenger);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        BottomNavigationScreen()));
+                            String? token =
+                                await secureStorage.read(key: "loginKey");
+                            if (await authenticator.classifier(token) == true) {
+                              print("관리자 로그인 성공");
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(successMessenger);
+                              Navigator.pushNamed(context, "/navigator");
+                            } else if (await authenticator.classifier(token) ==
+                                false) {
+                              print("멤버 로그인 성공");
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(successMessenger);
+                              Navigator.pushNamed(context, "/member");
+                            }
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(failedMessenger);

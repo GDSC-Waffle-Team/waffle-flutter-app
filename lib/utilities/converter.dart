@@ -1,6 +1,7 @@
 class Converters {
   String type = "";
   String memberId = "";
+  String nickname = "";
 
   untypeConverter(untype) {
     switch (untype) {
@@ -85,6 +86,81 @@ class Converters {
         return memberId = "yeaseul7";
       case "백세희":
         return memberId = "baeksehee";
+    }
+  }
+
+  memberIdConverter(memberId) {
+    switch (memberId) {
+      case "yehyeokbang":
+        return nickname = "방예혁";
+      case "yimjeongyeon":
+        return nickname = "임정연";
+      case "lgyn10":
+        return nickname = "이찬균";
+      case "khj0426":
+        return nickname = "김효중";
+      case "hyeshungoh":
+        return nickname = "오혜성";
+      case "hanni66":
+        return nickname = "김하은";
+      case "hanseulhee":
+        return nickname = "한슬희";
+      case "vact19":
+        return nickname = "조성우";
+      case "hangillee":
+        return nickname = "이한길";
+      case "hanhyunsoo":
+        return nickname = "한현수";
+      case "wangseohee":
+        return nickname = "왕서희";
+      case "myoungjinseo":
+        return nickname = "서명진";
+      case "sub101":
+        return nickname = "김수빈";
+      case "mojitobar":
+        return nickname = "주동석";
+      case "hyeall":
+        return nickname = "곽성은";
+      case "jaegwans":
+        return nickname = "김재관";
+      case "leehyunbok":
+        return nickname = "이현복";
+      case "devpark435":
+        return nickname = "박현렬";
+      case "sinamong0620":
+        return nickname = "김신아";
+      case "dd-jiyun":
+        return nickname = "이지윤";
+      case "yeezinu":
+        return nickname = "이진우";
+      case "yuj2n":
+        return nickname = "전유진";
+      case "jkkj0414":
+        return nickname = "김자경";
+      case "tndusy27":
+        return nickname = "김수연";
+      case "zoeyourlife":
+        return nickname = "최재훈";
+      case "rltgjqmtkdydwk":
+        return nickname = "김은총";
+      case "lee2eunji":
+        return nickname = "이은지";
+      case "kikingki":
+        return nickname = "이지선";
+      case "qwe016":
+        return nickname = "전홍영";
+      case "jiyoungmerong":
+        return nickname = "허지영";
+      case "ParkSY0919":
+        return nickname = "박신영";
+      case "parkjinhee53":
+        return nickname = "박진희";
+      case "negul3":
+        return nickname = "김가현";
+      case "yeaseul7":
+        return nickname = "이예슬";
+      case "baeksehee":
+        return nickname = "백세희";
     }
   }
 }

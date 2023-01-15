@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:waffle/providers/member_data.dart';
 import 'package:waffle/styles/palette.dart';
@@ -55,7 +56,7 @@ class _MemberScreenState extends State<MemberScreen> {
                   builder: ((BuildContext context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       var nickname = snapshot.data!.nickname;
-                      int totals = 1000;
+                      int totals = 0;
                       int lates = 0;
                       int absents = 0;
                       int nones = 0;
@@ -72,11 +73,18 @@ class _MemberScreenState extends State<MemberScreen> {
                           nones++;
                         }
                       }
+                      int pays = lates + nones;
+                      num temp = 2;
                       if (lates == 3) {
                         lates = 0;
                         absents++;
                       }
-                      totals = totals * (lates + nones) - 1000;
+                      for (num i = 0; i < pays; i++) {
+                        totals += 1000 * math.pow(temp, i).toInt();
+                      }
+                      if (lates == 0 && nones == 0) {
+                        totals = 0;
+                      }
                       return Column(
                         children: [
                           Row(
@@ -150,9 +158,9 @@ class _MemberScreenState extends State<MemberScreen> {
                             ],
                           ),
                           WaffleMemberBadge(
-                            total: totals,
+                            totals: totals,
                             lates: lates,
-                            absent: absents,
+                            absents: absents,
                           ),
                           SizedBox(height: 20),
                           Row(children: [
@@ -182,24 +190,31 @@ class _MemberScreenState extends State<MemberScreen> {
                                     var data = snapshot.data?.fines?[index];
                                     var date = data?.date;
                                     var type = data?.type;
+                                    var status = data?.status.toString();
+                                    if (status == "false") {
+                                      status = "미납부중";
+                                    } else if (status == "true") {
+                                      status = "납부완료";
+                                    }
                                     if (type == "00") {
                                       type = "지각";
+                                    } else if (type == "01") {
+                                      type = "결석";
+                                      absents += 1;
+                                    } else if (type == "10") {
+                                      type = "과제";
+                                    }
+
+                                    if (type == "지각" && status == "미납부중") {
                                       lates += 1;
                                       if (lates == 3) {
                                         absents += 1;
                                       }
-                                    } else if (type == "01") {
-                                      type = "결석";
-                                      absents += 1;
-                                    } else {
-                                      type = "미제출";
+                                    } else if (type == "과제" &&
+                                        status == "미납부중") {
+                                      nones += 1;
                                     }
-                                    var status = data?.status.toString();
-                                    if (status == "false") {
-                                      status = "미납부중";
-                                    } else {
-                                      status = "납부완료";
-                                    }
+
                                     return Container(
                                       child: Card(
                                           elevation: 0,

@@ -212,7 +212,7 @@ class _MemberEditScreenState extends State<MemberEditScreen> {
                                                                                     showDialog(
                                                                                         context: context,
                                                                                         builder: ((context) {
-                                                                                          return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero), title: const Text("성공", style: TextStyle()), content: const Text("내역을 성공적으로 삭제했어요!", style: TextStyle(color: Palette.darkGrey)));
+                                                                                          return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero), title: const Text("성공"), content: const Text("내역을 성공적으로 삭제했어요!", style: TextStyle(color: Palette.darkGrey)));
                                                                                         }));
                                                                                     setState(() {
                                                                                       _edit;
@@ -221,7 +221,7 @@ class _MemberEditScreenState extends State<MemberEditScreen> {
                                                                                     showDialog(
                                                                                         context: context,
                                                                                         builder: ((context) {
-                                                                                          return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero), title: const Text("성공", style: TextStyle()), content: const Text("내역을 삭제하는데 실패했어요.", style: TextStyle(color: Palette.darkGrey)));
+                                                                                          return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero), title: const Text("성공"), content: const Text("내역을 삭제하는데 실패했어요.", style: TextStyle(color: Palette.darkGrey)));
                                                                                         }));
                                                                                   }
                                                                                 },

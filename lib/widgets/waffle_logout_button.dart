@@ -17,7 +17,7 @@ class WaffleLogoutButton extends StatelessWidget {
             style: TextStyle(
                 color: Palette.tickGrey,
                 fontSize: 15,
-                fontWeight: FontWeight.w100)),
+                fontWeight: FontWeight.w400)),
       ),
     );
   }

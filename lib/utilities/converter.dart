@@ -86,11 +86,15 @@ class Converters {
         return memberId = "yeaseul7";
       case "백세희":
         return memberId = "baeksehee";
+      case "김유진":
+        return memberId = "yujinkim1";
     }
   }
 
   memberIdConverter(memberId) {
     switch (memberId) {
+      case "yujinkim1":
+        return nickname = "김유진";
       case "yehyeokbang":
         return nickname = "방예혁";
       case "yimjeongyeon":
@@ -99,26 +103,12 @@ class Converters {
         return nickname = "이찬균";
       case "khj0426":
         return nickname = "김효중";
-      case "hyeshungoh":
-        return nickname = "오혜성";
-      case "hanni66":
-        return nickname = "김하은";
-      case "hanseulhee":
-        return nickname = "한슬희";
-      case "vact19":
-        return nickname = "조성우";
-      case "hangillee":
-        return nickname = "이한길";
-      case "hanhyunsoo":
-        return nickname = "한현수";
       case "wangseohee":
         return nickname = "왕서희";
       case "myoungjinseo":
         return nickname = "서명진";
       case "sub101":
         return nickname = "김수빈";
-      case "mojitobar":
-        return nickname = "주동석";
       case "hyeall":
         return nickname = "곽성은";
       case "jaegwans":
